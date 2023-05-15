@@ -1,5 +1,5 @@
 
-def get_keypoints(landmarks, mp_pose,frame_time,frame_num):
+def get_keypoints(landmarks,mp_pose):
         #kp center
         nose = [
             landmarks[mp_pose.PoseLandmark.NOSE.value].x,
@@ -101,7 +101,5 @@ def get_keypoints(landmarks, mp_pose,frame_time,frame_num):
             'RHip':right_hip,
             'RKnee':right_knee,
             'RAnkle':right_ankle,
-            'frame_time':frame_time,
-            'frame_num':frame_num
         }
         

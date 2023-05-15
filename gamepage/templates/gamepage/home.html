@@ -5,6 +5,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <sciprt src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></sciprt>
         <title>Title</title>
     </head>
     <body>
@@ -24,6 +25,7 @@
         </table>
 
         <h1>Video...</h1>
+        <!-- <div src="http://127.0.0.1:8000/show_sim"> aaaaa </div> -->
 <!-- 
         <table>
             <tr>
@@ -41,15 +43,25 @@
         <video id = "videoplay" width="430" height="340" controls autoplay>
             <source src="{% static '/video/yt_newjeans_ditto1.mp4' %}" type="video/mp4"> </source> 
         </video>
-        <p>Playback position: <span id="demo"></span></p>
-
+        <p>Playback position: <span id="demo" name="currentTime"></span></p>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script>
             var videocontrol = document.getElementById("videoplay");
-            videocontrol.addEventListener("timeupdate", myFunction);
+            videocontrol.addEventListener("timeupdate", e => {
+                let ctime = Math.round((videocontrol.currentTime));
+                document.getElementById("demo").innerHTML = ctime;
+                let param = {'ctime': ctime}
 
-            function myFunction() {
-                document.getElementById("demo").innerHTML = Math.round((videocontrol.currentTime));
-            }
+                $.ajax({
+                    url: '{% url "show_sim" %}',
+                    type:'POST',
+                    headers:{'X-CSRFTOKEN' : '{{ csrf_token }}'},
+                    data: JSON.stringify(param),
+                    success: function(data){ console.log(data);},
+                    error:function(){alert('실패');}
+                });   
+            });
+
         </script>
     </body>
 </html>
