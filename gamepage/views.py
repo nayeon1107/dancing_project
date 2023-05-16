@@ -86,9 +86,12 @@ def check_sim(request):
     key_dict=getKeypoint.get_keypoints(results.pose_landmarks.landmark,mpPose)
     key_dict['Middle']=[(key_dict['LShoulder'][0]+key_dict['RShoulder'][0])/2,(key_dict['LShoulder'][1]+key_dict['RShoulder'][1])/2,(key_dict['LShoulder'][2]+key_dict['RShoulder'][2])/2]
     MY_MOVE=sim_metrics.get_cam_movevector(key_dict)
-    score=sim_metrics.check_sim(MY_MOVE,MOVE_VECTOR[frame_time])
 
-    return render(request, "gamepage/home.html", {'score':score[0]})
+    score=sim_metrics.check_sim(MY_MOVE,MOVE_VECTOR[frame_time])
+    context={'Final Score':np.mean(score),'머리':score[0],'어깨':score[1],'왼상체1':score[2],'왼상체2':score[3],'오른상체1':score[4],'오른상체2':score[5],
+             '왼하체1':score[6],'왼하체2':score[7],'오른하체1':score[8],'오른하체2':score[9]}
+    return JsonResponse(context)
+    # return render(request, "gamepage/home.html", {'score':score[0]})
 
 
 # def origvideo(request):

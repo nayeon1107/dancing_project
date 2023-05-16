@@ -43,7 +43,12 @@
                     url: '{% url "check_sim" %}',
                     type:'POST',
                     headers:{'X-CSRFTOKEN' : '{{ csrf_token }}'},
-                    data: JSON.stringify(param)
+                    data: JSON.stringify(param),
+                    dataType :'json',
+                    success:function(data){
+                        console.log(data)
+                        document.getElementById("frame_sim").innerHTML = data['Final Score'];
+                    }
                 });   
             });
         </script>

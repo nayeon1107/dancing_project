@@ -30,11 +30,12 @@ def check_sim(test1,test2):
         eud = np.sqrt(2*(1-cosine_sim))
         score=100-(100*eud/2)
         score_avg.append(score) 
-        part1 = MOVE_PARTS[i][0]
-        part2 = MOVE_PARTS[i][1]
-
-        print(f"{part1:10s} → {part2:>10s}",end=' ')
-        print(' | score : ',score.round(3))
+        
+        # part1 = MOVE_PARTS[i][0]
+        # part2 = MOVE_PARTS[i][1]
+        # print(f"{part1:10s} → {part2:>10s}",end=' ')
+        # print(' | score : ',score.round(3))
+        # print(' ')
         
         i+=1
 
