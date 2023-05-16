@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.views.decorators import gzip
-from django.http import StreamingHttpResponse, JsonResponse
+from django.http import StreamingHttpResponse, JsonResponse, HttpResponse
 
 from . import sim_metrics, getKeypoint
 import cv2
 import threading
 import mediapipe as mp
 import json
+import numpy as np
 
 # -------------- PoseDetection -------------
 mpPose = mp.solutions.pose
@@ -22,6 +23,7 @@ def prev_video(id):
     return MOVE_VECTOR
 
 MOVE_VECTOR = prev_video(id)
+print(MOVE_VECTOR[5])
 
 class mediapipeCam(object):
     def __init__(self):
@@ -45,7 +47,13 @@ class mediapipeCam(object):
     def PoseProcess(self):
         imgRGB = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGB)
         results = pose.process(imgRGB)
-        # landmarks = results.pose_landmarks.landmark
+        if results.pose_landmarks:
+            mpDraw.draw_landmarks(
+                self.frame,
+                results.pose_landmarks,
+                mpPose.POSE_CONNECTIONS,
+                landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style())
+
         return results
         
 # -------------- Basic Cam -------------
@@ -70,17 +78,18 @@ def detectme(request):
         print("에러입니다...")
         pass
 
-def show_sim(request):
+def check_sim(request):
     jsonObject = json.loads(request.body)
     frame_time=jsonObject.get('ctime')
+
     results = cam.PoseProcess()
     key_dict=getKeypoint.get_keypoints(results.pose_landmarks.landmark,mpPose)
-    sim=sim_metrics(sim_metrics.get_cam_movevector(key_dict),MOVE_VECTOR[frame_time])
-    print(frame_time,sim)
-    # except:
-    #     print(frame_time,'a')
-    
-    return JsonResponse(jsonObject)
+    key_dict['Middle']=[(key_dict['LShoulder'][0]+key_dict['RShoulder'][0])/2,(key_dict['LShoulder'][1]+key_dict['RShoulder'][1])/2,(key_dict['LShoulder'][2]+key_dict['RShoulder'][2])/2]
+    MY_MOVE=sim_metrics.get_cam_movevector(key_dict)
+    score=sim_metrics.check_sim(MY_MOVE,MOVE_VECTOR[frame_time])
+
+    return render(request, "gamepage/home.html", {'score':score[0]})
+
 
 # def origvideo(request):
 #     try:

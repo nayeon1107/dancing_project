@@ -4,7 +4,6 @@ import numpy as np
 import os
 import json
 import time
-from sklearn.metrics.pairwise import cosine_similarity
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles

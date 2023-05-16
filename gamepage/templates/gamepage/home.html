@@ -19,49 +19,54 @@
                         style="width: 320px; height: 240px"
                     />
                 </td>
-
-                <td>나의 CAM...</td>
             </tr>
         </table>
 
-        <h1>Video...</h1>
-        <!-- <div src="http://127.0.0.1:8000/show_sim"> aaaaa </div> -->
-<!-- 
-        <table>
-            <tr>
-                <td>
-                    <img
-                        src="http://127.0.0.1:8000/origvideo"
-                        style="width: 320px; height: 240px"
-                    />
-                </td>
+        <h1>Video...<span id="frame_sim">{{score}}</span></h1>
+        <!-- <div src="http://127.0.0.1:8000/show_sim"></div> -->
 
-                <td>나의 비디오...</td>
-            </tr>
-        </table> -->
         {% load static %} 
         <video id = "videoplay" width="430" height="340" controls autoplay>
             <source src="{% static '/video/yt_newjeans_ditto1.mp4' %}" type="video/mp4"> </source> 
         </video>
-        <p>Playback position: <span id="demo" name="currentTime"></span></p>
+        <p>Playback position: <span id="currentTime" name="currentTime"></span></p>
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script>
             var videocontrol = document.getElementById("videoplay");
             videocontrol.addEventListener("timeupdate", e => {
                 let ctime = Math.round((videocontrol.currentTime));
-                document.getElementById("demo").innerHTML = ctime;
-                let param = {'ctime': ctime}
+                document.getElementById("currentTime").innerHTML = ctime;
+
+                let param = {'ctime': ctime};
 
                 $.ajax({
-                    url: '{% url "show_sim" %}',
+                    url: '{% url "check_sim" %}',
                     type:'POST',
                     headers:{'X-CSRFTOKEN' : '{{ csrf_token }}'},
-                    data: JSON.stringify(param),
-                    success: function(data){ console.log(data);},
-                    error:function(){alert('실패');}
+                    data: JSON.stringify(param)
                 });   
             });
-
         </script>
+        
+<!-- 
+        {% if score %}
+            {{score | json_script:'jsonData'}}
+            name is : 
+        <script type = 'text/javascript'>
+            var scoreData = JSON.parse(document.getElementById('jsonData').textContent);
+            for (var key1 in scoreData){
+                var jsonData = JSON.parse(scoreData[key1]);
+            };
+            console.log(jsonData)
+        </script>
+        {% endif %}
+        <script>
+            var control = document.getElementById("currentTime");
+            control.addEventListener("change", e => {
+                document.getElementById("frame_sim").innerHTML = jsonData;
+            })
+        </script> -->
+
+    
     </body>
 </html>
