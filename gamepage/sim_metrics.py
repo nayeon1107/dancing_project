@@ -5,7 +5,8 @@ import json
 import cv2
 import time
 
-MOVE_PARTS=[['nose','Middle'],
+MOVE_PARTS=[
+            ['nose','Middle'],
             
             ['LShoulder','RShoulder'],
             ['LElbow','LShoulder'],
@@ -27,8 +28,21 @@ def check_sim(test1,test2):
     i=0
     for move1,move2 in zip(test1,test2):
         cosine_sim= cosine_similarity(move1.flatten(),move2.flatten())
+        score=cosine_sim
         eud = np.sqrt(2*(1-cosine_sim))
         score=100-(100*eud/2)
+
+        # if score >=90 :
+        #     g = 5
+        # elif score >= 70 :
+        #     g = 4
+        # elif score >= 50:
+        #     g = 3
+        # elif score >= 20:
+        #     g = 2
+        # else :
+        #     g= 1
+
         score_avg.append(score) 
         
         # part1 = MOVE_PARTS[i][0]
@@ -69,7 +83,7 @@ def get_cam_movevector(key_dict):
     file_vec=[]
     for part in MOVE_PARTS:
         st_point=key_dict[part[0]][:2] 
-        end_point=key_dict[part[1]][:2]
+        end_point=key_dict[part[1]][:]
         vec=[ep-sp for sp, ep in zip(st_point, end_point)]
         vec=vec/np.linalg.norm(vec)
         
