@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gamepage',
-    'bootstrap4',
+    'singlepages',
+    # 'bootstrap4',
 ]
 
 MIDDLEWARE = [

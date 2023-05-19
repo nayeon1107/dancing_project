@@ -1,5 +1,5 @@
 {% load static %} 
-<!-- stgame.html -->
+<!-- landing.html -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -32,9 +32,9 @@
               -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
               -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
               box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
-            }
-          </style>
-        <title>Title</title>
+            } -->
+          <!-- </style>
+        <title>Dancing With ME !</title>
     </head>
     <body>
         <header class="masthead text-white text-center">
@@ -74,7 +74,7 @@
                 <option>yt_newjeans_ditto2</option>
                 </select>
               </div>
-              <button class="btn btn-primary btn-lg btn-block" onclick="clickbtn()" >game start</button>
+              <button class="btn btn-primary btn-lg btn-block" onclick=clickbtn()>game start</button>
             </form>
           </div>
        
@@ -83,23 +83,28 @@
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
         <script type="text/javascript">
-          // function linkreplace(){
-          //   window.location=location.protocol+'//'+location.host+'/stgame'        
-          // }
-          function clickbtn() {
+          function linkreplace(){
+            link='gamepage/stgame'
+            location.replace(link)
+            console.log(location.href)
+          };
 
-            window.location=location.protocol+'//'+location.host+'/stgame'
-
-            // var inputName = document.getElementById("inputName");
-            // var inputPW = document.getElementById("inputPW");
-            // var root = document.getElementById("root");
+          function clickbtn() {  
+            var inputName = document.getElementById("inputName");
+            var inputPW = document.getElementById("inputPW");
+            var root = document.getElementById("root");
             
-            // sessionStorage.setItem("username", inputName.value);
-            // sessionStorage.setItem("userpw", inputPW.value);
-            // sessionStorage.setItem("root", root.value);
-            // console.log(window.location.host)
-            // linkreplace()
-          }
+            sessionStorage.setItem("username", inputName.value);
+            sessionStorage.setItem("userpw", inputPW.value);
+            sessionStorage.setItem("root", root.value);
+           
+            document.write('<p style="font-size: 80px; text-align: center;">Loading..</p>' );
+            
+            
+            linkreplace()
+
+          };
+    
     
           
           </script>

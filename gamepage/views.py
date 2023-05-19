@@ -58,9 +58,9 @@ class mediapipeCam(object):
         return results
         
 # -------------- Basic Cam -------------
-def home(request):
-    context = {}
-    return render(request, "gamepage/home.html", context)
+# def home(request):
+#     context = {}
+#     return render(request, "gamepage/home.html", context)
 
 def stgame(request):
     context = {}

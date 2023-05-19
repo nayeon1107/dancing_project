@@ -55,12 +55,29 @@
                 <td>
                     <h1 style="text-align: center;"> You </h1>
                     <img
-                        src="http://127.0.0.1:8000/detectme"
+                        src="http://127.0.0.1:8000/gamepage/detectme"
                         style="width: 800px; height: 450px"
                     />
                 </td>
             </tr>
         </table>
+        <div class="modal" tabindex="-1" id="MyModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Modal title</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -81,9 +98,10 @@
 
                 return g
             }
-
+            var myModal = document.getElementById('myModal')
             videocontrol.addEventListener('ended', e => {
                 alert("end");
+                // $('#myModal').show();
                 sessionStorage.setItem("finalScore", final_score);
                 link = 'rank';
                 location.replace(link);
