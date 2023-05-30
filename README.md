@@ -17,16 +17,40 @@ Mediapipe model을 기반으로 안무 영상 속 Dancer의 동작과 User의 �
 - openpose, 와 비교 결과 Webcom 연결 시 Mediapipe의 속도가 더 우수하여 채택
 
 # 🖥 기술 스택
-- **Frontend**
-
-<img src="https://img.shields.io/badge/django-3776AB?style=for-the-badge&logo=django&logoColor=white"> <img src="https://img.shields.io/badge/Javascript-FF4B4B?style=for-the-badge&logo=Javascript&logoColor=white">
-
-- **Backend**
-<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white"> 
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white"> <img src="https://img.shields.io/badge/django-3776AB?style=for-the-badge&logo=django&logoColor=white"> <img src="https://img.shields.io/badge/Javascript-FF4B4B?style=for-the-badge&logo=Javascript&logoColor=white">
 
 # 📚 파일 구조
+- templates
+
+home.html -- 메인페이지
+
+stgame.html -- 게임페이지
+
+rank.html -- 점수페이지
+
+- functions
+
+
+get_keypoint.py -- 관절 추정 기능
+
+sim_metrics.py -- 유사도 측정 기능
+
+view.py -- 주요 기능
+
+
 
 # 🏆 점수 도출 방법
+![동작벡터](https://github.com/nayeon1107/dancing_project/assets/95599133/f7ab17e6-86d3-4328-99dc-eb1c4b78fc13)
+- 추정된 포인트를 비교에 용이한 벡터 형식 동작 데이터로 변환
+  - mediapipe 로 도출되는 keypoint 중 13개 사용
+  
+    ㄴ nose, left_shoulder, left_elbow, left_wrist,right_shoulder, right_elbow, right_wrist,left_hip, left_knee, left_ankle, right_hip, right_knee, right_ankle
+  - keypoint를 연결하여 핵심 동작 벡터 변환 
+  
+    ㄴ 머리 : ['nose','Middle’], 어깨 : ['LShoulder','RShoulder’], 엉덩이 : ['LHip','RHip'], 왼상체1: ['LElbow','LShoulder’], 오른상체1 : ['RElbow','RShoulder’], 왼상체2 :[ 'LWrist','LElbow’], 오른상체2 : ['RWrist','RElbow'], 왼하체1 : ['LKnee','LHip'], 오른하체1 : ['RKnee','RHip’], 왼하체2 : ['LAnkle','LKnee'], 오른하체2 :['RAnkle','RKnee']
+- 동일 부위의 두 벡터 간 각도차를 스코어로 정량화하기 위하여 L2 정규화, 코사인 유사도와 유클리드 거리 공식 사용 후 점수화
+![정량화](https://github.com/nayeon1107/dancing_project/assets/95599133/f7f5a185-e694-4307-904d-719fcb5ff5aa)
+
 
 # 개발 개요
 - **인원** : 2명
