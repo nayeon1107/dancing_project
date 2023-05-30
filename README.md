@@ -20,23 +20,20 @@ Mediapipe model을 기반으로 안무 영상 속 Dancer의 동작과 User의 �
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=Python&logoColor=white"> <img src="https://img.shields.io/badge/django-3776AB?style=for-the-badge&logo=django&logoColor=white"> <img src="https://img.shields.io/badge/Javascript-FF4B4B?style=for-the-badge&logo=Javascript&logoColor=white">
 
 # 📚 파일 구조
-- templates
-
-home.html -- 메인페이지
-
-stgame.html -- 게임페이지
-
-rank.html -- 점수페이지
-
-- functions
-
-
-get_keypoint.py -- 관절 추정 기능
-
-sim_metrics.py -- 유사도 측정 기능
-
-view.py -- 주요 기능
-
+```bash
+📂singlepages
+ ┃ ┣ 📂templates
+ ┃ ┃ ┗ 📂singlepages
+ ┃ ┃ ┃ ┗ 📜landing.html    -- 메인페이지
+📂gamepage
+ ┃ ┣ 📂templates
+ ┃ ┃ ┗ 📂gamepage
+ ┃ ┃ ┃ ┣ 📜rank.html       -- 점수페이지
+ ┃ ┃ ┃ ┗ 📜stgame.html     -- 게임페이지
+ ┃ ┣ 📜getKeypoint.py 	   -- 관절 추정 기능
+ ┃ ┣ 📜sim_metrics.py      -- 유사도 측정 기능
+ ┗ ┗ 📜views.py            -- 기타 주요 기능
+```
 
 
 # 🏆 점수 도출 방법
