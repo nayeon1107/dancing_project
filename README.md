@@ -1,6 +1,6 @@
 # 💃 dancing_project 🕺
 
-Mediapipe model을 기반으로 안무 영상 속 Dancer의 동작과 User의 동작 간 유사도를 실시간으로 측정하여 점수를 도출하는 Dancing Game 
+Mediapipe model을 기반으로 안무 영상 속 Dancer의 동작과 User의 동작 간 유사도를 실시간으로 측정하여 점수를 도출하는 Dancing Game
 
 # 💡 아이디어 도출배경
 
@@ -37,6 +37,9 @@ Mediapipe model을 기반으로 안무 영상 속 Dancer의 동작과 User의 �
 
 
 # 🏆 점수 도출 방법
+
+선행 연구를 기반으로 (1) LSTM Autoencoder 기반 잠재벡터 도출 (2) 동작 벡터 변환 두 가지 방식을 구상 후, 이를 비교하여 실시간 환경에서 보다 빠르고 정확하게 구동될 것으로 판단되는 **(2) 동작 벡터 변환** 방식을 선정함
+
 ![동작벡터](https://github.com/nayeon1107/dancing_project/assets/95599133/f7ab17e6-86d3-4328-99dc-eb1c4b78fc13)
 - 추정된 포인트를 비교에 용이한 벡터 형식 동작 데이터로 변환
   - mediapipe 로 도출되는 keypoint 중 13개 사용
